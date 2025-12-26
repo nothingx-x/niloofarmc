@@ -23,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
+    <html lang="fa-IR">
+      <body style={{direction:"rtl"}}
         className={`${vazirMatn.className} antialiased`}
       >
         {children}
