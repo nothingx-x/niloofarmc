@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const vazirMatn = Vazirmatn({
   variable: "--font-vazirmatn",
   subsets: ["latin","arabic", "latin-ext"],
 });
+const royeen = localFont({src: "../public/fonts/Royeen.ttf", preload: true});
 
 export const metadata: Metadata = {
   title: "Niloofar MC - نیلوفر ام سی",
@@ -25,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="fa-IR">
       <body style={{direction:"rtl"}}
-        className={`${vazirMatn.className} antialiased`}
+        className={`${vazirMatn.className} ${royeen.className} antialiased`}
       >
         {children}
       </body>

@@ -1,3 +1,4 @@
+import { Server } from "@/app/generated/prisma"
 import prisma from "@/app/libs/prisma"
 
 export async function GET(request: Request) {
@@ -27,17 +28,17 @@ export async function PATCH(request: Request) {
     })
     if (!server) return new Response('Not found', { status: 404 })
 
-    const body = await request.json()
-    const name = body.get('name')
-    const description = body.get('description')
-    const ip = body.get('ip')
-    const address = body.get('address')
-    const port = body.get('port')
-    const country = body.get('country')
-    const region = body.get('region')
-    const type = body.get('type')
-    const latency = body.get('latency')
-    const votes = body.get('votes')
+    const body = await request.json() as Server
+    const name = body.name
+    const description = body.description || ''
+    const ip = body.ip
+    const address = body.address || ''
+    const port = body.port
+    const country = body.countryCode || ""
+    const region = body.region || ""
+    const type = body.type
+    const latency = body.latency
+    const votes = body.votes
 
     if (!name || !ip || !port || !type) return new Response('Invalid data', { status: 400 })
 
@@ -50,12 +51,12 @@ export async function PATCH(request: Request) {
             description,
             ip,
             address,
-            port: parseInt(port),
+            port: port,
             countryCode: country,
             region,
             type: type,
-            latency: parseInt(latency),
-            votes: parseInt(votes),
+            latency: latency,
+            votes: votes,
         }
     })
 
