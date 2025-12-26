@@ -5,10 +5,89 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../app/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  id         Int                @id @default(autoincrement())
+  username   String
+  password   String
+  role       UserRole
+  submission ServerSubmission[]
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  @@index([username])
+  @@index([role])
+}
+
+enum ServerType {
+  JAVA
+  BEDROCK
+}
+
+model ServerPlayers {
+  id        Int      @id @default(autoincrement())
+  serverId  Int      @unique
+  max       Int
+  current   Int
+  record    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  server    Server   @relation(fields: [serverId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Server {
+  id          Int            @id @default(autoincrement())
+  name        String
+  description String?
+  ip          String
+  address     String?
+  port        Int            @default(25565)
+  countryCode String?
+  region      String?
+  latency     Int            @default(0)
+  type        ServerType     @default(JAVA)
+  players     ServerPlayers?
+  votes       Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@index([type])
+  @@index([countryCode])
+  @@index([region])
+}
+
+enum ServerSubmissionStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  UNKNOWN
+}
+
+model ServerSubmission {
+  id          Int                    @id @default(autoincrement())
+  name        String
+  description String?
+  ip          String
+  address     String?
+  port        Int                    @default(25565)
+  type        ServerType             @default(JAVA)
+  status      ServerSubmissionStatus @default(PENDING)
+  statusText  String                 @default("")
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
 }
