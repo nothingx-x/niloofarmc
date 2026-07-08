@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Header } from "@/components/header";
 
 const vazirMatn = Vazirmatn({
   variable: "--font-vazirmatn",
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body
         className={`${vazirMatn.className} ${royeen.className} antialiased`}
       >
+        <Header />
         <main className="max-w-[1200px] mx-auto px-4 py-2">{children}</main>
       </body>
     </html>
