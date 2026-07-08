@@ -1,5 +1,6 @@
 import Image from "next/image";
 import HeroImage from "@/public/images/intro.webp";
+import Logo from "@/public/niloofar.png";
 
 export default async function Home() {
   return (
@@ -19,7 +20,8 @@ export default async function Home() {
           fill
           className="absolute top-0 left-0 object-cover opacity-40 -z-20"
         />
-        <div className="flex flex-col justify-center items-center gap-2">
+        <div className="flex flex-col justify-center items-center gap-4">
+          <Image src={Logo} alt="لوگو" className="w-20 h-20" />
           <h1 className="text-4xl">نیلوفر ام سی</h1>
           <p className="text-base text-center text-balance">
             با نیلوفر ام سی سرور ماینکرفت فارسی پیدا کن. سرورتو پیشرفت بده و..
@@ -64,8 +66,37 @@ export default async function Home() {
 
       <section className="flex flex-col justify-center items-center gap-4 mt-12">
         <h2 className="text-2xl">محبوب ترین سرور ها</h2>
+        <p className="text-base text-center text-primary/70 text-balance">
+          سرور هایی که بیشترین بازیکن را دارند
+        </p>
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="h-80 w-80 bg-primary/70"></div>
+          <div
+            key={i}
+            className="flex flex-col items-center justify-center gap-4 px-4 py-2 h-80 w-80 bg-primary/70 rounded-md shadow-primary/20 shadow-xs"
+          >
+            <Image
+              src={Logo}
+              alt="لوگو"
+              className="w-20 h-20 rounded-full"
+              width={80}
+              height={80}
+            />
+            <h4 className="text-2xl text-center text-secondary/70">
+              سرور {new Intl.NumberFormat("fa-IR").format(i + 1)}
+            </h4>
+            <p className="text-base text-center text-primary/70">
+              توضیحات سرور {new Intl.NumberFormat("fa-IR").format(i + 1)}
+            </p>
+            <p>
+              آنلاین:{" "}
+              {new Intl.NumberFormat("fa-IR").format(
+                Math.floor(Math.random() * 100)
+              )}
+            </p>
+            <button className="px-4 py-2 bg-accent hover:bg-purple-700 focus:bg-purple-700 transition-colors duration-300 border-2 border-purple-900 text-blue-200 cursor-pointer">
+              » کپی نشانی
+            </button>
+          </div>
         ))}
       </section>
     </div>
