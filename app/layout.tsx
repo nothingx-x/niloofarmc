@@ -5,18 +5,28 @@ import "./globals.css";
 
 const vazirMatn = Vazirmatn({
   variable: "--font-vazirmatn",
-  subsets: ["latin","arabic", "latin-ext"],
+  subsets: ["latin", "arabic", "latin-ext"],
 });
-const royeen = localFont({src: "../public/fonts/Royeen.ttf", preload: true});
+const royeen = localFont({ src: "../public/fonts/Royeen.ttf", preload: true });
 
 export const metadata: Metadata = {
   title: "Niloofar MC - نیلوفر ام سی",
   description: "آمار محبوب ترین سرور های ماینکرفت",
-  keywords: ["نیلوفر ام سی", "سرور ماینکرفت", "سرور ماینکرافت", "سرور آنلاین ماینکرفت", "ماینکرفت آنلاین", "ماینکرفت", "ماینکرافت", "سرور فارسی ماینکرفت", "برترین سرورهای ماینکرفت فارسی"],
+  keywords: [
+    "نیلوفر ام سی",
+    "سرور ماینکرفت",
+    "سرور ماینکرافت",
+    "سرور آنلاین ماینکرفت",
+    "ماینکرفت آنلاین",
+    "ماینکرفت",
+    "ماینکرافت",
+    "سرور فارسی ماینکرفت",
+    "برترین سرورهای ماینکرفت فارسی",
+  ],
   applicationName: "Niloofar MC",
   publisher: "Niloofar MC",
   category: "Games",
-  authors: [{name:"Niloofar MC"}],
+  authors: [{ name: "Niloofar MC" }],
 };
 
 export default function RootLayout({
@@ -25,11 +35,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa-IR">
-      <body style={{direction:"rtl"}}
+    <html lang="fa-IR" dir="rtl">
+      <body
         className={`${vazirMatn.className} ${royeen.className} antialiased`}
       >
-        {children}
+        <main className="max-w-[1200px] mx-auto px-4 py-2">{children}</main>
       </body>
     </html>
   );
